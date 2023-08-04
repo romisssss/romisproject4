@@ -1,0 +1,131 @@
+/* Form container styles */
+body{
+background-image: url("img/pexels-juan-pablo-serrano-arenas-1242348.jpg.jpg");
+background-size: cover;
+    background-repeat: no-repeat;
+    background-position: cover;
+    }
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+
+    padding-bottom: 70px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Material checkboxes styles */
+.material-checkboxes {
+    display: flex;
+    margin-top: 10px;
+}
+
+.material-checkboxes label {
+    margin-right: 15px;
+}
+
+/* Submit button styles */
+.form-group button {
+   background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    direction: flex;
+    margin: 0 auto;
+    gap: 10px;
+    justify-content: center;
+    align-items: center; /* Add this line to center the buttons vertically */
+    margin-top: 20px;
+
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+/* Success message and return link styles */
+#success-message {
+    margin-top: 20px;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+#return-home-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Optional: Add some spacing between the form and the buttons */
+}
+
+.small-button {
+    padding: 5px 10px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.primary-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.secondary-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <link rel="stylesheet" href="{% static 'userform_style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    {% include 'nav.html' %}
+<div class="form-container">
+    <h2>User Form</h2>
+    <form id="user-form" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span class="error-msg" id="name-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <span class="error-msg" id="dob-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <span class="error-msg" id="age-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <span class="error-msg" id="gender-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+            <span class="error-msg" id="phone_number-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="mail_id">Mail ID:</label>
+            <input type="email" id="mail_id" name="mail_id" required>
+            <span class="error-msg" id="mail_id-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+            <span class="error-msg" id="address-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="district">District:</label>
+            <select id="district" name="district" required>
+                <option value="">Select District</option>
+                {% for district in districts %}
+                <option value="{{ district.id }}">{{ district.name }}</option>
+                {% endfor %}
+            </select>
+            <span class="error-msg" id="district-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="branch">Branch:</label>
+            <select id="branch" name="branch" required>
+
+            </select>
+            <span class="error-msg" id="branch-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="account_type">Account Type:</label>
+            <select id="account_type" name="account_type" required>
+                <option value="">Select Account Type</option>
+                {% for account_type in account_types %}
+                <option value="{{ account_type.id }}">{{ account_type.name }}</option>
+                {% endfor %}
+            </select>
+            <span class="error-msg" id="account_type-error"></span>
+        </div>
+        <div class="form-group">
+            <label>Materials Provide:</label>
+            <div class="material-checkboxes">
+                <input type="checkbox" id="debit_card" name="materials_provide" value="debit_card">
+                <label for="debit_card">Debit Card</label>
+                <input type="checkbox" id="credit_card" name="materials_provide" value="credit_card">
+                <label for="credit_card">Credit Card</label>
+                <input type="checkbox" id="cheque_book" name="materials_provide" value="cheque_book">
+                <label for="cheque_book">Cheque Book</label>
+            </div>
+            <span class="error-msg" id="materials_provide-error"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="small-button primary-button">Submit</button>
+
+        </div>
+    </form>
+    <div id="success-message" style="display: none;"></div>
+    <a id="return-home-link" href="{% url 'userhome' %}" style="display: none;">Return to Home Page</a>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        $("#district").change(function() {
+            const selectedDistrictId = $(this).val();
+            $.getJSON(`/get_branches/${selectedDistrictId}/`, function(data) {
+                const $branchDropdown = $("#branch");
+                $branchDropdown.empty();
+                $.each(data.branches, function(index, branch) {
+                    $branchDropdown.append(
+                        $("<option>", { value: branch.id, text: branch.name })
+                    );
+                });
+            });
+        });
+
+        // Handle form submission
+        $("#user-form").submit(function(e) {
+            e.preventDefault();
+            // Custom validation for each field
+            let isValidForm = true;
+
+            // Name validation
+            const name = $("#name").val();
+            if (!name) {
+                $("#name-error").text("Please enter your name.");
+                isValidForm = false;
+            } else {
+                $("#name-error").text("");
+            }
+
+            // Date of Birth validation
+            const dob = $("#dob").val();
+            if (!dob) {
+                $("#dob-error").text("Please enter your Date of Birth.");
+                isValidForm = false;
+            } else {
+                $("#dob-error").text("");
+            }
+
+            // Age validation
+            const age = $("#age").val();
+            if (!age) {
+                $("#age-error").text("Please enter your age.");
+                isValidForm = false;
+            } else if (age < 18 || age > 100) {
+                $("#age-error").text("Age must be between 18 and 100.");
+                isValidForm = false;
+            } else {
+                $("#age-error").text("");
+            }
+
+            // Gender validation
+            const gender = $("#gender").val();
+            if (!gender) {
+                $("#gender-error").text("Please select your gender.");
+                isValidForm = false;
+            } else {
+                $("#gender-error").text("");
+            }
+
+            // Phone Number validation
+            const phoneNumber = $("#phone_number").val();
+            if (!phoneNumber) {
+                $("#phone_number-error").text("Please enter your phone number.");
+                isValidForm = false;
+            } else {
+                $("#phone_number-error").text("");
+            }
+
+            // Mail ID validation
+            const mailId = $("#mail_id").val();
+            if (!mailId) {
+                $("#mail_id-error").text("Please enter your mail ID.");
+                isValidForm = false;
+            } else if (!isValidMailId(mailId)) {
+                $("#mail_id-error").text("Please enter a valid mail ID.");
+                isValidForm = false;
+            } else {
+                $("#mail_id-error").text("");
+            }
+
+            // Address validation
+            const address = $("#address").val();
+            if (!address) {
+                $("#address-error").text("Please enter your address.");
+                isValidForm = false;
+            } else {
+                $("#address-error").text("");
+            }
+
+            // District validation
+            const district = $("#district").val();
+            if (!district) {
+                $("#district-error").text("Please select a district.");
+                isValidForm = false;
+            } else {
+                $("#district-error").text("");
+            }
+
+            // Branch validation
+            const branch = $("#branch").val();
+            if (!branch) {
+                $("#branch-error").text("Please select a branch.");
+                isValidForm = false;
+            } else {
+                $("#branch-error").text("");
+            }
+
+            // Account Type validation
+            const accountType = $("#account_type").val();
+            if (!accountType) {
+                $("#account_type-error").text("Please select an account type.");
+                isValidForm = false;
+            } else {
+                $("#account_type-error").text("");
+            }
+
+            // Materials Provide validation
+            const materialsProvide = $("input[name='materials_provide']:checked").length;
+            if (materialsProvide === 0) {
+                $("#materials_provide-error").text("Please select at least one materials provide option.");
+                isValidForm = false;
+            } else {
+                $("#materials_provide-error").text("");
+            }
+
+            if (!isValidForm) {
+                return; // If any field is invalid, do not proceed with form submission
+            }
+
+            // If all validation passed, submit the form using AJAX
+            $.ajax({
+                url: "{% url 'submit_form' %}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Display the success message and the link to return to the home page
+                    window.location.href = "/success/?message=Application%20submitted%20successfully!";
+                },
+                error: function() {
+                    alert("Failed to submit the form. Please try again.");
+                },
+            });
+        });
+
+        $("#logout-button").click(function() {
+            // Perform the logout action here, e.g., redirect to a logout URL
+            window.location.href = "{% url 'logout' %}";
+        });
+
+        // Custom function to validate mail ID format
+        function isValidMailId(mailId) {
+            const mailIdPattern = /^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,3})+$/;
+            return mailIdPattern.test(mailId);
+        }
+
+    });
+</script>

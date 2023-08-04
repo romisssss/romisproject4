@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar li {
+            margin-right: 20px;
+        }
+
+        .navbar li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .scrolling-text-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scrolling-text {
+            font-family: 'Helvetica', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            white-space: nowrap;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: scrollText 15s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .redirect-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2;
+        }
+
+        .redirect-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <a href="{% url 'home' %}" class="redirect-button">Go Home</a>
+        </ul>
+    </nav>
+    <div class="scrolling-text-container">
+        <div class="scrolling-text">Welcome to SIB Bank - Experience next generation banking</div>
+    </div>
+
+</body>
+</html>

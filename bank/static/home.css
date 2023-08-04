@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("img/home.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: cover;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+
+}
+
+.navbar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content li {
+    display: block;
+}
+
+.dropdown-content li a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.content {
+    padding: 20px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content li {
+    display: block;
+}
+
+.dropdown-content li a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+/* Add a hover effect to the dropdown items */
+.dropdown-content li a:hover {
+    background-color: #ddd; /* Change the background color on hover */
+}
+.bank-name {
+    text-align: center;
+    font-size: 72px; /* Increased font size for a bigger impact */
+    font-weight: bold;
+    color: #FF4500; /* Coral Red */
+    margin-top: 200px; /* Increased margin-top for better positioning */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow for depth */
+}
+
+.bank-caption {
+    text-align: center;
+    font-size: 32px; /* Increased font size for the caption */
+    color: #8B008B; /* Indigo */
+    margin-top: 20px;
+    font-style: italic; /* Make the caption italic for emphasis */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow for depth */
+}
+
